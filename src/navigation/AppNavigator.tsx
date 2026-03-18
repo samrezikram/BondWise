@@ -8,7 +8,7 @@ import {
   sanitizeNumberInput,
   validateBondInput,
 } from '@domain';
-import { BondFormState } from '@features/bond-calculator/types';
+import { BondFormState } from '../features/bond-calculator/types';
 import {
   BondFormScreen,
   BondScheduleScreen,

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Card, FrequencyToggle, LabeledInput } from '@components';
 import { AppTheme, useAppTheme } from '@theme';
 import { BondInput } from '@domain';
-import { BondFormState } from '@features/bond-calculator/types';
+import { BondFormState } from './types';
 
 interface BondFormCardProps {
   readonly form: BondFormState;

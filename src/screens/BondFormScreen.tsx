@@ -4,8 +4,8 @@ import { StyleSheet, Text } from 'react-native';
 import { AppHeader, PrimaryButton, Screen } from '@components';
 import { AppTheme, useAppTheme } from '@theme';
 import { BondInput } from '@domain';
-import { BondFormCard } from '@features/bond-calculator/BondFormCard';
-import { BondFormState } from '@features/bond-calculator/types';
+import { BondFormCard } from '../features/bond-calculator/BondFormCard';
+import { BondFormState } from '../features/bond-calculator/types';
 
 type BondFormScreenProps = Readonly<{
   form: BondFormState;
