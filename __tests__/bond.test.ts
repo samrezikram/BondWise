@@ -2,7 +2,7 @@ import {
   BondInput,
   calculateBondSummary,
   validateBondInput,
-} from '../src/domain/bond';
+} from '@domain';
 
 describe('bond domain logic', () => {
   it('calculates current yield, ytm, and cash flows for an annual coupon bond', () => {

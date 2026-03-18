@@ -1,97 +1,105 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# BondWise
 
-# Getting Started
+BondWise is a React Native + TypeScript app for bond yield analysis.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+The UI is intentionally split into a simple flow:
 
-## Step 1: Start Metro
+1. Inputs
+2. Summary
+3. Cash Flow
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+That makes the app easier to understand for new users and easier to change live in an interview.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Features
+
+- Face value, coupon rate, market price, years to maturity, and coupon frequency inputs
+- Current yield, YTM, total interest, and premium/discount summary
+- Separate cash flow screen with payment schedule
+- Light and dark theme support
+- Safe validation while typing so empty or partial values do not crash the app
+
+## Structure
+
+- `src/domain/bond.ts`
+  - Bond math, validation, YTM solver, schedule generation
+- `src/navigation/AppNavigator.tsx`
+  - Lightweight app navigation: `Inputs -> Summary -> Cash Flow`
+- `src/features/bond-calculator/`
+  - Feature-level modules for the bond calculator UI
+- `src/screens/`
+  - Screen composition for each step in the flow
+- `src/components/`
+  - Reusable shared UI primitives
+- `src/design/`
+  - Tokens and runtime theme support
+
+Each main folder now has an `index.ts` so imports can stay shallow.
+
+## Import Aliases
+
+- `@theme`
+- `@domain`
+- `@components`
+- `@features/*`
+- `@navigation`
+- `@screens`
+- `@lib`
+- `@designsystem` and `@designsytem`
+
+## Run
 
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
 yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
 yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+For iOS:
 
 ```sh
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
 bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Verify
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```sh
+yarn --ignore-engines lint
+yarn --ignore-engines test --watch=false --watchman=false
+yarn --ignore-engines test:coverage
+```
 
-## Step 3: Modify your app
+Coverage HTML report:
 
-Now that you have successfully run the app, let's make changes!
+- `coverage/lcov-report/index.html`
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Commit Plan
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+These are the commits I would use so the history stays interview-friendly:
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+1. `feat: add validated bond domain model and cash flow logic`
+2. `feat: add theme system with light and dark palettes`
+3. `feat: build reusable calculator UI primitives`
+4. `feat: split calculator into input summary and cash flow screens`
+5. `test: cover app render and calculator behavior`
+6. `docs: document app flow and local setup`
 
-## Congratulations! :tada:
+## Interview Walkthrough
 
-You've successfully run and modified your React Native App. :partying_face:
+Start here:
 
-### Now what?
+1. `src/domain/bond.ts`
+2. `src/navigation/AppNavigator.tsx`
+3. `src/features/bond-calculator/`
+4. `src/screens/BondFormScreen.tsx`
+5. `src/screens/BondSummaryScreen.tsx`
+6. `src/screens/BondScheduleScreen.tsx`
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## Delivery
 
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Push the branch to GitHub
+- Record a short demo showing:
+  - entering inputs
+  - moving to the summary screen
+  - opening the cash flow screen
+  - changing coupon frequency live
