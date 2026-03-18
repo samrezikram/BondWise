@@ -3,14 +3,8 @@ import { StyleSheet, Text } from 'react-native';
 
 import { AppHeader, Card, PrimaryButton, Screen } from '@components';
 import { AppTheme, useAppTheme } from '@theme';
-import { BondSummary } from '@domain';
 import { BondSummaryCard } from '../features/bond-calculator/BondSummaryCard';
-
-type BondSummaryScreenProps = Readonly<{
-  summary: BondSummary | null;
-  onBack: () => void;
-  onOpenSchedule: () => void;
-}>;
+import { BondSummaryScreenProps } from './types';
 
 export function BondSummaryScreen({
   summary,

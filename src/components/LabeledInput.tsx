@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  KeyboardTypeOptions,
   StyleSheet,
   Text,
   TextInput,
@@ -8,16 +7,7 @@ import {
 } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
-
-type LabeledInputProps = {
-  readonly label: string;
-  readonly value: string;
-  readonly onChangeText: (value: string) => void;
-  readonly keyboardType?: KeyboardTypeOptions;
-  readonly suffix?: string;
-  readonly helperText?: string;
-  readonly errorText?: string;
-};
+import { LabeledInputProps } from './types';
 
 export function LabeledInput({
   label,

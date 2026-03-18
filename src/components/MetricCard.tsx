@@ -2,12 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
-
-type MetricCardProps = {
-  readonly label: string;
-  readonly value: string;
-  readonly tone?: 'default' | 'accent' | 'warning' | 'success';
-};
+import { MetricCardProps } from './types';
 
 export function MetricCard({
   label,

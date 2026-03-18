@@ -3,10 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AppTheme, useAppTheme } from '@theme';
-
-type ScreenProps = {
-  readonly children: React.ReactNode;
-};
+import { ScreenProps } from './types';
 
 export function Screen({ children }: Readonly<ScreenProps>) {
   const insets = useSafeAreaInsets();

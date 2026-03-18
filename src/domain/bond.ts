@@ -1,3 +1,5 @@
+import { YTM_MAX_ITERATIONS, YTM_TOLERANCE } from './constants';
+
 export type CouponFrequency = 'annual' | 'semi-annual';
 
 export type BondInput = Readonly<{
@@ -32,9 +34,6 @@ export type BondSummary = Readonly<{
   totalPeriods: number;
   cashFlows: ReadonlyArray<CashFlowRow>;
 }>;
-
-const YTM_TOLERANCE = 0.0000001;
-const YTM_MAX_ITERATIONS = 200;
 
 export function validateBondInput(input: BondInput): BondValidationError[] {
   const errors: BondValidationError[] = [];

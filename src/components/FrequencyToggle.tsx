@@ -2,17 +2,8 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
-import { CouponFrequency } from '@domain';
-
-type FrequencyToggleProps = {
-  readonly value: CouponFrequency;
-  readonly onChange: (value: CouponFrequency) => void;
-};
-
-const options: ReadonlyArray<Readonly<{ label: string; value: CouponFrequency }>> = [
-  { label: 'Annual', value: 'annual' },
-  { label: 'Semi-Annual', value: 'semi-annual' },
-];
+import { frequencyToggleOptions } from './constants';
+import { FrequencyToggleProps } from './types';
 
 export function FrequencyToggle({
   value,
@@ -23,7 +14,7 @@ export function FrequencyToggle({
 
   return (
     <View style={styles.wrapper}>
-      {options.map(option => {
+      {frequencyToggleOptions.map(option => {
         const isSelected = option.value === value;
 
         return (

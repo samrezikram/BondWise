@@ -2,12 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
-
-type PrimaryButtonProps = Readonly<{
-  label: string;
-  disabled?: boolean;
-  onPress: () => void;
-}>;
+import { PrimaryButtonProps } from './types';
 
 export function PrimaryButton({
   label,

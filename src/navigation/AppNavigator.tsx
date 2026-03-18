@@ -9,21 +9,13 @@ import {
   validateBondInput,
 } from '@domain';
 import { BondFormState } from '../features/bond-calculator/types';
+import { defaultBondFormState } from './constants';
 import {
   BondFormScreen,
   BondScheduleScreen,
   BondSummaryScreen,
 } from '@screens';
-
-type RouteName = 'form' | 'summary' | 'schedule';
-
-const defaultForm: BondFormState = {
-  faceValue: '1000',
-  annualCouponRate: '5',
-  marketPrice: '950',
-  yearsToMaturity: '7',
-  couponFrequency: 'semi-annual',
-};
+import { RouteName } from './types';
 
 function buildErrorMap(errors: ReadonlyArray<BondValidationError>) {
   return errors.reduce<Partial<Record<keyof BondInput, string>>>((acc, error) => {
@@ -44,7 +36,7 @@ function toBondInput(form: BondFormState): BondInput {
 
 export function AppNavigator() {
   const [route, setRoute] = useState<RouteName>('form');
-  const [form, setForm] = useState<BondFormState>(defaultForm);
+  const [form, setForm] = useState<BondFormState>(defaultBondFormState);
 
   const input = useMemo(() => toBondInput(form), [form]);
   const errors = useMemo(() => validateBondInput(input), [input]);

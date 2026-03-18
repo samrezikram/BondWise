@@ -1,12 +1,8 @@
 import React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
-
-type CardProps = {
-  readonly children: React.ReactNode;
-  readonly style?: StyleProp<ViewStyle>;
-};
+import { CardProps } from './types';
 
 export function Card({ children, style }: Readonly<CardProps>) {
   const theme = useAppTheme();

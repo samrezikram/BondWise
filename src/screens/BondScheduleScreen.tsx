@@ -3,13 +3,8 @@ import { StyleSheet, Text } from 'react-native';
 
 import { AppHeader, Card, Screen } from '@components';
 import { AppTheme, useAppTheme } from '@theme';
-import { BondSummary } from '@domain';
 import { CashFlowTableCard } from '../features/bond-calculator/CashFlowTableCard';
-
-type BondScheduleScreenProps = Readonly<{
-  summary: BondSummary | null;
-  onBack: () => void;
-}>;
+import { BondScheduleScreenProps } from './types';
 
 export function BondScheduleScreen({
   summary,

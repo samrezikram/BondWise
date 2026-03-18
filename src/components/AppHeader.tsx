@@ -2,18 +2,14 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
+import { AppHeaderProps } from './types';
 
 export function AppHeader({
   title,
   subtitle,
   backLabel,
   onBack,
-}: Readonly<{
-  title: string;
-  subtitle?: string;
-  backLabel?: string;
-  onBack?: () => void;
-}>) {
+}: AppHeaderProps) {
   const theme = useAppTheme();
   const styles = getStyles(theme);
 
