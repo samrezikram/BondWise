@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
 
-import { AppHeader, Card, PrimaryButton, Screen } from '@components';
-import { AppTheme, useAppTheme } from '@theme';
+import { AppHeader, AppText, Card, PrimaryButton, Screen } from '@components';
 import { BondSummaryCard } from '../features/bond-calculator/BondSummaryCard';
 import { BondSummaryScreenProps } from './types';
 
@@ -11,9 +9,6 @@ export function BondSummaryScreen({
   onBack,
   onOpenSchedule,
 }: BondSummaryScreenProps) {
-  const theme = useAppTheme();
-  const styles = getStyles(theme);
-
   return (
     <Screen>
       <AppHeader
@@ -29,18 +24,11 @@ export function BondSummaryScreen({
         </>
       ) : (
         <Card>
-          <Text style={styles.emptyText}>Return to inputs and complete the bond details.</Text>
+          <AppText variant="body" tone="muted">
+            Return to inputs and complete the bond details.
+          </AppText>
         </Card>
       )}
     </Screen>
   );
 }
-
-const getStyles = (theme: AppTheme) =>
-  StyleSheet.create({
-    emptyText: {
-      color: theme.colors.textMuted,
-      fontSize: theme.typography.body,
-      lineHeight: 22,
-    },
-  });

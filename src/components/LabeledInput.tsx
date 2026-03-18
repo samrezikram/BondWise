@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
+import { AppText } from './AppText';
 import { LabeledInputProps } from './types';
 
 export function LabeledInput({
@@ -19,8 +20,14 @@ export function LabeledInput({
   return (
     <View style={styles.container}>
       <View style={styles.headerRow}>
-        <Text style={styles.label}>{label}</Text>
-        {suffix ? <Text style={styles.suffix}>{suffix}</Text> : null}
+        <AppText variant="label" weight="bold" uppercase style={styles.label}>
+          {label}
+        </AppText>
+        {suffix ? (
+          <AppText variant="caption" weight="bold" tone="muted" style={styles.suffix}>
+            {suffix}
+          </AppText>
+        ) : null}
       </View>
       <TextInput
         style={[styles.input, errorText ? styles.inputError : null]}
@@ -31,9 +38,13 @@ export function LabeledInput({
         placeholderTextColor={theme.colors.textMuted}
       />
       {errorText ? (
-        <Text style={styles.errorText}>{errorText}</Text>
+        <AppText variant="caption" tone="danger" style={styles.errorText}>
+          {errorText}
+        </AppText>
       ) : helperText ? (
-        <Text style={styles.helperText}>{helperText}</Text>
+        <AppText variant="caption" tone="muted" style={styles.helperText}>
+          {helperText}
+        </AppText>
       ) : null}
     </View>
   );
@@ -50,16 +61,8 @@ const getStyles = (theme: AppTheme) =>
       justifyContent: 'space-between',
     },
     label: {
-      color: theme.colors.text,
-      fontSize: theme.typography.caption,
-      fontWeight: '700',
-      textTransform: 'uppercase',
-      letterSpacing: 0.4,
     },
     suffix: {
-      color: theme.colors.textMuted,
-      fontSize: theme.typography.caption,
-      fontWeight: '700',
     },
     input: {
       backgroundColor: theme.colors.inputBackground,
@@ -67,8 +70,9 @@ const getStyles = (theme: AppTheme) =>
       borderRadius: theme.radii.md,
       borderWidth: 1,
       color: theme.colors.text,
+      fontFamily: theme.fontFamilies.body,
       fontSize: theme.typography.title,
-      fontWeight: '700',
+      fontWeight: theme.fontWeights.bold,
       paddingHorizontal: theme.spacing.md,
       paddingVertical: theme.spacing.sm,
     },
@@ -76,13 +80,7 @@ const getStyles = (theme: AppTheme) =>
       borderColor: theme.colors.danger,
     },
     helperText: {
-      color: theme.colors.textMuted,
-      fontSize: theme.typography.caption,
-      lineHeight: 18,
     },
     errorText: {
-      color: theme.colors.danger,
-      fontSize: theme.typography.caption,
-      lineHeight: 18,
     },
   });

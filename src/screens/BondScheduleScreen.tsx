@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
 
-import { AppHeader, Card, Screen } from '@components';
-import { AppTheme, useAppTheme } from '@theme';
+import { AppHeader, AppText, Card, Screen } from '@components';
 import { CashFlowTableCard } from '../features/bond-calculator/CashFlowTableCard';
 import { BondScheduleScreenProps } from './types';
 
@@ -10,9 +8,6 @@ export function BondScheduleScreen({
   summary,
   onBack,
 }: BondScheduleScreenProps) {
-  const theme = useAppTheme();
-  const styles = getStyles(theme);
-
   return (
     <Screen>
       <AppHeader
@@ -24,26 +19,19 @@ export function BondScheduleScreen({
       {summary ? (
         <>
           <Card>
-            <Text style={styles.meta}>
+            <AppText variant="body" tone="muted">
               {summary.totalPeriods} payments · {summary.premiumDiscountLabel}
-            </Text>
+            </AppText>
           </Card>
           <CashFlowTableCard summary={summary} />
         </>
       ) : (
         <Card>
-          <Text style={styles.meta}>Return to the summary screen after entering valid inputs.</Text>
+          <AppText variant="body" tone="muted">
+            Return to the summary screen after entering valid inputs.
+          </AppText>
         </Card>
       )}
     </Screen>
   );
 }
-
-const getStyles = (theme: AppTheme) =>
-  StyleSheet.create({
-    meta: {
-      color: theme.colors.textMuted,
-      fontSize: theme.typography.body,
-      lineHeight: 22,
-    },
-  });

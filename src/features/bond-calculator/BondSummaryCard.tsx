@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { Card, MetricCard } from '@components';
+import { AppText, Card, MetricCard } from '@components';
 import { AppTheme, useAppTheme } from '@theme';
 import { BondSummary } from '@domain';
 import { formatCurrency, formatPercent } from '@lib';
@@ -47,16 +47,20 @@ export function BondSummaryCard({
       </View>
       <View style={styles.footer}>
         <View style={styles.footerItem}>
-          <Text style={styles.footerLabel}>Annual coupon</Text>
-          <Text style={styles.footerValue}>
+          <AppText variant="label" weight="bold" uppercase tone="muted" style={styles.footerLabel}>
+            Annual coupon
+          </AppText>
+          <AppText variant="subtitle" weight="bold" style={styles.footerValue}>
             {formatCurrency(summary.annualCouponPayment)}
-          </Text>
+          </AppText>
         </View>
         <View style={styles.footerItem}>
-          <Text style={styles.footerLabel}>Each payment</Text>
-          <Text style={styles.footerValue}>
+          <AppText variant="label" weight="bold" uppercase tone="muted" style={styles.footerLabel}>
+            Each payment
+          </AppText>
+          <AppText variant="subtitle" weight="bold" style={styles.footerValue}>
             {formatCurrency(summary.periodicCouponPayment)}
-          </Text>
+          </AppText>
         </View>
       </View>
     </Card>
@@ -83,15 +87,7 @@ const getStyles = (theme: AppTheme) =>
       gap: theme.spacing.xs,
     },
     footerLabel: {
-      color: theme.colors.textMuted,
-      fontSize: theme.typography.caption,
-      fontWeight: '700',
-      textTransform: 'uppercase',
-      letterSpacing: 0.4,
     },
     footerValue: {
-      color: theme.colors.text,
-      fontSize: theme.typography.subtitle,
-      fontWeight: '700',
     },
   });

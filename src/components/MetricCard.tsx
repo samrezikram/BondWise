@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
+import { AppText } from './AppText';
 import { MetricCardProps } from './types';
 
 export function MetricCard({
@@ -15,8 +16,21 @@ export function MetricCard({
 
   return (
     <View style={[styles.card, toneStyles[tone].card]}>
-      <Text style={[styles.label, toneStyles[tone].label]}>{label}</Text>
-      <Text style={[styles.value, toneStyles[tone].value]}>{value}</Text>
+      <AppText
+        variant="label"
+        weight="bold"
+        uppercase
+        style={[styles.label, toneStyles[tone].label]}
+      >
+        {label}
+      </AppText>
+      <AppText
+        variant="title"
+        weight="bold"
+        style={[styles.value, toneStyles[tone].value]}
+      >
+        {value}
+      </AppText>
     </View>
   );
 }
@@ -32,14 +46,8 @@ const getStyles = (theme: AppTheme) =>
       gap: theme.spacing.xs,
     },
     label: {
-      fontSize: theme.typography.caption,
-      fontWeight: '700',
-      textTransform: 'uppercase',
-      letterSpacing: 0.4,
     },
     value: {
-      fontSize: theme.typography.title,
-      fontWeight: '700',
     },
   });
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
+import { AppText } from './AppText';
 import { PrimaryButtonProps } from './types';
 
 export function PrimaryButton({
@@ -22,9 +23,14 @@ export function PrimaryButton({
         pressed && !disabled ? styles.buttonPressed : null,
       ]}
     >
-      <Text style={[styles.label, disabled ? styles.labelDisabled : null]}>
+      <AppText
+        variant="body"
+        weight="bold"
+        tone={disabled ? 'muted' : 'inverse'}
+        style={styles.label}
+      >
         {label}
-      </Text>
+      </AppText>
     </Pressable>
   );
 }
@@ -45,11 +51,5 @@ const getStyles = (theme: AppTheme) =>
       opacity: 0.9,
     },
     label: {
-      color: theme.colors.surface,
-      fontSize: theme.typography.body,
-      fontWeight: '700',
-    },
-    labelDisabled: {
-      color: theme.colors.textMuted,
     },
   });

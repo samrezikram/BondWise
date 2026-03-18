@@ -1,7 +1,8 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
+import { AppText } from './AppText';
 import { frequencyToggleOptions } from './constants';
 import { FrequencyToggleProps } from './types';
 
@@ -23,14 +24,17 @@ export function FrequencyToggle({
             onPress={() => onChange(option.value)}
             style={[styles.option, isSelected && styles.optionSelected]}
           >
-            <Text
+            <AppText
+              variant="label"
+              weight="bold"
+              tone={isSelected ? 'inverse' : 'muted'}
               style={[
                 styles.optionLabel,
                 isSelected && styles.optionLabelSelected,
               ]}
             >
               {option.label}
-            </Text>
+            </AppText>
           </Pressable>
         );
       })}
@@ -56,13 +60,8 @@ const getStyles = (theme: AppTheme) =>
       backgroundColor: theme.colors.accent,
     },
     optionLabel: {
-      color: theme.colors.textMuted,
-      fontSize: theme.typography.caption,
-      fontWeight: '700',
       textAlign: 'center',
-      letterSpacing: 0.4,
     },
     optionLabelSelected: {
-      color: theme.colors.surface,
     },
   });

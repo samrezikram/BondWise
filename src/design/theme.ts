@@ -4,6 +4,8 @@ import { ColorSchemeName, useColorScheme } from 'react-native';
 import {
   AppColors,
   darkColors,
+  fontFamilies,
+  fontWeights,
   lightColors,
   radii,
   shadows,
@@ -22,6 +24,8 @@ export type AppTheme = {
   shadows: typeof shadows;
   spacing: typeof spacing;
   typography: typeof typography;
+  fontFamilies: typeof fontFamilies;
+  fontWeights: typeof fontWeights;
   isDark: boolean;
 };
 
@@ -36,6 +40,8 @@ export function createAppTheme(colorScheme: ColorSchemeName): AppTheme {
     shadows,
     spacing,
     typography,
+    fontFamilies,
+    fontWeights,
     isDark: colorScheme === 'dark',
   };
 }

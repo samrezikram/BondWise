@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { AppHeader, PrimaryButton, Screen } from '@components';
+import { AppHeader, AppText, PrimaryButton, Screen } from '@components';
 import { AppTheme, useAppTheme } from '@theme';
 import { BondFormCard } from '../features/bond-calculator/BondFormCard';
 import { BondFormScreenProps } from './types';
@@ -30,7 +30,9 @@ export function BondFormScreen({
         onChange={onChange}
       />
       {!canContinue ? (
-        <Text style={styles.helper}>Fill all fields with valid values to continue.</Text>
+        <AppText variant="caption" tone="muted" style={styles.helper}>
+          Fill all fields with valid values to continue.
+        </AppText>
       ) : null}
       <PrimaryButton
         label="Review Results"
@@ -44,9 +46,6 @@ export function BondFormScreen({
 const getStyles = (theme: AppTheme) =>
   StyleSheet.create({
     helper: {
-      color: theme.colors.textMuted,
-      fontSize: theme.typography.caption,
-      lineHeight: 18,
       marginTop: -theme.spacing.sm,
     },
   });

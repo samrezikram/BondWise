@@ -1,4 +1,5 @@
 export * from './AppHeader';
+export * from './AppText';
 export * from './Card';
 export * from './constants';
 export * from './FrequencyToggle';

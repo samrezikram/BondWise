@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
-import { Card } from '@components';
+import { AppText, Card } from '@components';
 import { AppTheme, useAppTheme } from '@theme';
 import { BondSummary } from '@domain';
 import { formatCurrency } from '@lib';
@@ -66,7 +66,14 @@ function Cell({
 }: CellProps) {
   return (
     <View style={[styles.cell, { width }]}>
-      <Text style={header ? styles.headerText : styles.cellText}>{text}</Text>
+      <AppText
+        variant="caption"
+        weight={header ? 'bold' : 'medium'}
+        family={header ? 'body' : 'mono'}
+        style={header ? styles.headerText : styles.cellText}
+      >
+        {text}
+      </AppText>
     </View>
   );
 }
@@ -94,16 +101,8 @@ const getStyles = (theme: AppTheme) =>
       paddingVertical: theme.spacing.md,
     },
     headerText: {
-      color: theme.colors.text,
-      fontSize: theme.typography.caption,
-      fontWeight: '700',
       letterSpacing: 0.4,
     },
     cellText: {
-      color: theme.colors.text,
-      fontFamily: 'Menlo',
-      fontSize: theme.typography.caption,
-      fontWeight: '500',
-      lineHeight: 18,
     },
   });

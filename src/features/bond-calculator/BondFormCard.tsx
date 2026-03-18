@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { Card, FrequencyToggle, LabeledInput } from '@components';
+import { AppText, Card, FrequencyToggle, LabeledInput } from '@components';
 import { AppTheme, useAppTheme } from '@theme';
 import { BondInput } from '@domain';
 import { BondFormState } from './types';
@@ -63,7 +63,9 @@ export function BondFormCard({
         />
       </View>
       <View style={styles.frequencyBlock}>
-        <Text style={styles.label}>Coupon frequency</Text>
+        <AppText variant="label" weight="bold" uppercase style={styles.label}>
+          Coupon frequency
+        </AppText>
         <FrequencyToggle
           value={form.couponFrequency}
           onChange={value =>
@@ -85,10 +87,5 @@ const getStyles = (theme: AppTheme) =>
       marginTop: theme.spacing.lg,
     },
     label: {
-      color: theme.colors.text,
-      fontSize: theme.typography.caption,
-      fontWeight: '700',
-      textTransform: 'uppercase',
-      letterSpacing: 0.4,
     },
   });

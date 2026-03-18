@@ -1,5 +1,11 @@
 import React from 'react';
-import { KeyboardTypeOptions, StyleProp, ViewStyle } from 'react-native';
+import {
+  KeyboardTypeOptions,
+  StyleProp,
+  TextProps,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 import { CouponFrequency } from '@domain';
 
@@ -9,6 +15,38 @@ export type AppHeaderProps = Readonly<{
   backLabel?: string;
   onBack?: () => void;
 }>;
+
+export type AppTextVariant =
+  | 'hero'
+  | 'title'
+  | 'subtitle'
+  | 'body'
+  | 'caption'
+  | 'label'
+  | 'micro';
+
+export type AppTextWeight = 'regular' | 'medium' | 'semibold' | 'bold';
+
+export type AppTextTone =
+  | 'default'
+  | 'muted'
+  | 'accent'
+  | 'inverse'
+  | 'danger'
+  | 'success'
+  | 'warning';
+
+export type AppTextProps = Readonly<
+  TextProps & {
+    children?: React.ReactNode;
+    variant?: AppTextVariant;
+    weight?: AppTextWeight;
+    tone?: AppTextTone;
+    family?: 'body' | 'display' | 'mono';
+    uppercase?: boolean;
+    style?: StyleProp<TextStyle>;
+  }
+>;
 
 export type CardProps = Readonly<{
   children: React.ReactNode;

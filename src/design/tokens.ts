@@ -66,6 +66,19 @@ export const typography = {
   micro: 11,
 } as const;
 
+export const fontFamilies = {
+  body: 'System',
+  display: 'Georgia',
+  mono: 'Menlo',
+} as const;
+
+export const fontWeights = {
+  regular: '400',
+  medium: '500',
+  semibold: '600',
+  bold: '700',
+} as const;
+
 export const shadows = {
   card: {
     shadowColor: '#2B2118',

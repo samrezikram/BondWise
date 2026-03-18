@@ -1,7 +1,8 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppTheme, useAppTheme } from '@theme';
+import { AppText } from './AppText';
 import { AppHeaderProps } from './types';
 
 export function AppHeader({
@@ -18,15 +19,31 @@ export function AppHeader({
       <View style={styles.row}>
         {onBack ? (
           <Pressable onPress={onBack} style={styles.backButton}>
-            <Text style={styles.backLabel}>{backLabel ?? 'Back'}</Text>
+            <AppText variant="caption" weight="bold" tone="accent" style={styles.backLabel}>
+              {backLabel ?? 'Back'}
+            </AppText>
           </Pressable>
         ) : (
           <View style={styles.backSpacer} />
         )}
-        <Text style={styles.brand}>BondWise</Text>
+        <AppText
+          variant="label"
+          weight="bold"
+          tone="muted"
+          uppercase
+          style={styles.brand}
+        >
+          BondWise
+        </AppText>
       </View>
-      <Text style={styles.title}>{title}</Text>
-      {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
+      <AppText variant="hero" weight="bold" family="display" style={styles.title}>
+        {title}
+      </AppText>
+      {subtitle ? (
+        <AppText variant="body" tone="muted" style={styles.subtitle}>
+          {subtitle}
+        </AppText>
+      ) : null}
     </View>
   );
 }
@@ -50,28 +67,13 @@ const getStyles = (theme: AppTheme) =>
       width: 48,
     },
     backLabel: {
-      color: theme.colors.accent,
-      fontSize: theme.typography.caption,
-      fontWeight: '700',
     },
     brand: {
-      color: theme.colors.textMuted,
-      fontSize: theme.typography.caption,
-      fontWeight: '700',
       letterSpacing: 0.6,
-      textTransform: 'uppercase',
     },
     title: {
-      color: theme.colors.text,
-      fontSize: 32,
-      lineHeight: 36,
-      fontWeight: '700',
-      fontFamily: 'Georgia',
     },
     subtitle: {
-      color: theme.colors.textMuted,
-      fontSize: theme.typography.body,
-      lineHeight: 22,
       maxWidth: 320,
     },
   });
