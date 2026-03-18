@@ -1,0 +1,77 @@
+import React from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { AppTheme, useAppTheme } from '@theme';
+import { CouponFrequency } from '@domain';
+
+type FrequencyToggleProps = {
+  readonly value: CouponFrequency;
+  readonly onChange: (value: CouponFrequency) => void;
+};
+
+const options: ReadonlyArray<Readonly<{ label: string; value: CouponFrequency }>> = [
+  { label: 'Annual', value: 'annual' },
+  { label: 'Semi-Annual', value: 'semi-annual' },
+];
+
+export function FrequencyToggle({
+  value,
+  onChange,
+}: Readonly<FrequencyToggleProps>) {
+  const theme = useAppTheme();
+  const styles = getStyles(theme);
+
+  return (
+    <View style={styles.wrapper}>
+      {options.map(option => {
+        const isSelected = option.value === value;
+
+        return (
+          <Pressable
+            key={option.value}
+            onPress={() => onChange(option.value)}
+            style={[styles.option, isSelected && styles.optionSelected]}
+          >
+            <Text
+              style={[
+                styles.optionLabel,
+                isSelected && styles.optionLabelSelected,
+              ]}
+            >
+              {option.label}
+            </Text>
+          </Pressable>
+        );
+      })}
+    </View>
+  );
+}
+
+const getStyles = (theme: AppTheme) =>
+  StyleSheet.create({
+    wrapper: {
+      backgroundColor: theme.colors.surfaceMuted,
+      borderRadius: theme.radii.pill,
+      flexDirection: 'row',
+      padding: 4,
+    },
+    option: {
+      borderRadius: theme.radii.pill,
+      flex: 1,
+      paddingHorizontal: theme.spacing.md,
+      paddingVertical: theme.spacing.sm,
+    },
+    optionSelected: {
+      backgroundColor: theme.colors.accent,
+    },
+    optionLabel: {
+      color: theme.colors.textMuted,
+      fontSize: theme.typography.caption,
+      fontWeight: '700',
+      textAlign: 'center',
+      letterSpacing: 0.4,
+    },
+    optionLabelSelected: {
+      color: theme.colors.surface,
+    },
+  });

@@ -2,18 +2,30 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { BondCalculatorScreen } from './src/screens/BondCalculatorScreen';
-import { appTheme } from './src/design/theme';
+import { AppThemeProvider, useAppTheme } from '@theme';
+import { AppNavigator } from '@navigation';
 
-function App(): React.JSX.Element {
+function App() {
   return (
     <SafeAreaProvider>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor={appTheme.colors.background}
-      />
-      <BondCalculatorScreen />
+      <AppThemeProvider>
+        <AppShell />
+      </AppThemeProvider>
     </SafeAreaProvider>
+  );
+}
+
+function AppShell() {
+  const theme = useAppTheme();
+
+  return (
+    <>
+      <StatusBar
+        barStyle={theme.isDark ? 'light-content' : 'dark-content'}
+        backgroundColor={theme.colors.background}
+      />
+      <AppNavigator />
+    </>
   );
 }
 

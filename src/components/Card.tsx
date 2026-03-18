@@ -1,24 +1,36 @@
 import React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { appTheme } from '../design/theme';
+import { AppTheme, useAppTheme } from '@theme';
 
 type CardProps = {
-  children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+  readonly children: React.ReactNode;
+  readonly style?: StyleProp<ViewStyle>;
 };
 
-export function Card({ children, style }: CardProps) {
-  return <View style={[styles.card, style]}>{children}</View>;
+export function Card({ children, style }: Readonly<CardProps>) {
+  const theme = useAppTheme();
+  const styles = getStyles(theme);
+
+  return (
+    <View style={styles.shadow}>
+      <View style={[styles.card, style]}>{children}</View>
+    </View>
+  );
 }
 
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: appTheme.colors.surface,
-    borderRadius: appTheme.radii.lg,
-    borderWidth: 1,
-    borderColor: appTheme.colors.border,
-    padding: appTheme.spacing.lg,
-    ...appTheme.shadows.card,
-  },
-});
+const getStyles = (theme: AppTheme) =>
+  StyleSheet.create({
+    shadow: {
+      borderRadius: theme.radii.lg,
+      ...theme.shadows.card,
+    },
+    card: {
+      backgroundColor: theme.colors.surface,
+      borderRadius: theme.radii.lg,
+      borderWidth: 1,
+      borderColor: theme.colors.border,
+      overflow: 'hidden',
+      padding: theme.spacing.lg,
+    },
+  });

@@ -2,14 +2,16 @@ import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { appTheme } from '../design/theme';
+import { AppTheme, useAppTheme } from '@theme';
 
 type ScreenProps = {
-  children: React.ReactNode;
+  readonly children: React.ReactNode;
 };
 
-export function Screen({ children }: ScreenProps) {
+export function Screen({ children }: Readonly<ScreenProps>) {
   const insets = useSafeAreaInsets();
+  const theme = useAppTheme();
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.root}>
@@ -18,8 +20,8 @@ export function Screen({ children }: ScreenProps) {
         contentContainerStyle={[
           styles.content,
           {
-            paddingTop: insets.top + appTheme.spacing.md,
-            paddingBottom: insets.bottom + appTheme.spacing.xxl,
+            paddingTop: insets.top + theme.spacing.md,
+            paddingBottom: insets.bottom + theme.spacing.xxl,
           },
         ]}
         showsVerticalScrollIndicator={false}
@@ -30,16 +32,17 @@ export function Screen({ children }: ScreenProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: appTheme.colors.background,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  content: {
-    paddingHorizontal: appTheme.spacing.lg,
-    gap: appTheme.spacing.lg,
-  },
-});
+const getStyles = (theme: AppTheme) =>
+  StyleSheet.create({
+    root: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    scrollView: {
+      flex: 1,
+    },
+    content: {
+      paddingHorizontal: theme.spacing.lg,
+      gap: theme.spacing.lg,
+    },
+  });
