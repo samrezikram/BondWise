@@ -10,11 +10,23 @@ The UI is intentionally split into a simple flow:
 
 That makes the app easier to understand for new users and easier to change live in an interview.
 
+## Screenshots
+
+| Inputs                                            | Summary                                               | Cash Flow                                                |
+| ------------------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
+| ![Light Input Screen](screenshots/inputLight.png) | ![Light Summary Screen](screenshots/summeryLight.png) | ![Light Cash Flow Screen](screenshots/cashflowLight.png) |
+| ![Dark Input Screen](screenshots/inputDark.png)   | ![Dark Summary Screen](screenshots/summeryDark.png)   | ![Dark Cash Flow Screen](screenshots/cashflowDark.png)   |
+
+## Demo Video
+
+- [BondWise app demo](screenshots/BondWise.mp4)
+
 ## Features
 
 - Face value, coupon rate, market price, years to maturity, and coupon frequency inputs
 - Current yield, YTM, total interest, and premium/discount summary
 - Separate cash flow screen with payment schedule
+- Cash flow table columns: Period, Payment Date, Coupon Payment, Cumulative Interest, Remaining Principal
 - Light and dark theme support
 - Safe validation while typing so empty or partial values do not crash the app
 
@@ -103,3 +115,4 @@ Start here:
   - moving to the summary screen
   - opening the cash flow screen
   - changing coupon frequency live
+- Include both light-theme and dark-theme app states in the demo or README screenshots
