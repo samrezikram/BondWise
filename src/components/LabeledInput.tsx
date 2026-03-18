@@ -24,7 +24,12 @@ export function LabeledInput({
           {label}
         </AppText>
         {suffix ? (
-          <AppText variant="caption" weight="bold" tone="muted" style={styles.suffix}>
+          <AppText
+            variant="caption"
+            weight="bold"
+            tone="muted"
+            style={styles.suffix}
+          >
             {suffix}
           </AppText>
         ) : null}
@@ -60,10 +65,8 @@ const getStyles = (theme: AppTheme) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    label: {
-    },
-    suffix: {
-    },
+    label: {},
+    suffix: {},
     input: {
       backgroundColor: theme.colors.inputBackground,
       borderColor: theme.colors.border,
@@ -79,8 +82,6 @@ const getStyles = (theme: AppTheme) =>
     inputError: {
       borderColor: theme.colors.danger,
     },
-    helperText: {
-    },
-    errorText: {
-    },
+    helperText: {},
+    errorText: {},
   });
