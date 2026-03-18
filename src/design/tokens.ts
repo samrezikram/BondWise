@@ -1,4 +1,4 @@
-export const colors = {
+export const lightColors = {
   background: '#F3EBDD',
   surface: '#FFFDF8',
   surfaceMuted: '#E8DCC8',
@@ -14,6 +14,30 @@ export const colors = {
   warning: '#8A5A12',
   warningSoft: '#F5E5C8',
   inputBackground: '#FFF9EF',
+  heroSubtle: '#9FE3DA',
+  heroText: '#D7DEE8',
+  rowAlt: '#FCF8F1',
+} as const;
+
+export const darkColors = {
+  background: '#11151C',
+  surface: '#1A212B',
+  surfaceMuted: '#27303A',
+  border: '#39424D',
+  text: '#F4EBDD',
+  textMuted: '#B1BAC5',
+  accent: '#5BC0B4',
+  accentStrong: '#0B3B37',
+  danger: '#F08B73',
+  dangerSoft: '#46241E',
+  success: '#78C6A3',
+  successSoft: '#1C352B',
+  warning: '#E4B86A',
+  warningSoft: '#47371B',
+  inputBackground: '#202934',
+  heroSubtle: '#97E1D8',
+  heroText: '#DAE5EF',
+  rowAlt: '#161D26',
 } as const;
 
 export const spacing = {
@@ -51,3 +75,5 @@ export const shadows = {
     elevation: 3,
   },
 } as const;
+
+export type AppColors = typeof lightColors | typeof darkColors;

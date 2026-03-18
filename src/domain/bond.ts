@@ -1,33 +1,37 @@
 export type CouponFrequency = 'annual' | 'semi-annual';
 
-export type BondInput = {
+export type BondInput = Readonly<{
   faceValue: number;
   annualCouponRate: number;
   marketPrice: number;
   yearsToMaturity: number;
   couponFrequency: CouponFrequency;
-};
+}>;
 
-export type BondValidationError = {
+export type BondValidationError = Readonly<{
   field: keyof BondInput;
   message: string;
-};
+}>;
 
-export type CashFlowRow = {
+export type CashFlowRow = Readonly<{
   period: number;
   paymentDate: string;
   couponPayment: number;
   cumulativeInterest: number;
   remainingPrincipal: number;
-};
+}>;
 
-export type BondSummary = {
+export type BondSummary = Readonly<{
   currentYieldPercent: number;
   yieldToMaturityPercent: number;
   totalInterestEarned: number;
   premiumDiscountLabel: 'Premium' | 'Discount' | 'At Par';
-  cashFlows: CashFlowRow[];
-};
+  premiumDiscountAmount: number;
+  annualCouponPayment: number;
+  periodicCouponPayment: number;
+  totalPeriods: number;
+  cashFlows: ReadonlyArray<CashFlowRow>;
+}>;
 
 const YTM_TOLERANCE = 0.0000001;
 const YTM_MAX_ITERATIONS = 200;
@@ -36,7 +40,10 @@ export function validateBondInput(input: BondInput): BondValidationError[] {
   const errors: BondValidationError[] = [];
 
   if (input.faceValue <= 0) {
-    errors.push({ field: 'faceValue', message: 'Face value must be greater than 0.' });
+    errors.push({
+      field: 'faceValue',
+      message: 'Face value must be greater than 0.',
+    });
   }
 
   if (input.annualCouponRate < 0) {
@@ -74,7 +81,10 @@ export function calculateBondSummary(
   }
 
   const periodsPerYear = getPeriodsPerYear(input.couponFrequency);
-  const totalPeriods = Math.max(1, Math.round(input.yearsToMaturity * periodsPerYear));
+  const totalPeriods = Math.max(
+    1,
+    Math.round(input.yearsToMaturity * periodsPerYear),
+  );
   const couponPayment =
     (input.faceValue * (input.annualCouponRate / 100)) / periodsPerYear;
   const annualCouponIncome = couponPayment * periodsPerYear;
@@ -83,7 +93,14 @@ export function calculateBondSummary(
     currentYieldPercent: (annualCouponIncome / input.marketPrice) * 100,
     yieldToMaturityPercent: solveYieldToMaturity(input, totalPeriods) * 100,
     totalInterestEarned: couponPayment * totalPeriods,
-    premiumDiscountLabel: getPremiumDiscountLabel(input.marketPrice, input.faceValue),
+    premiumDiscountLabel: getPremiumDiscountLabel(
+      input.marketPrice,
+      input.faceValue,
+    ),
+    premiumDiscountAmount: Math.abs(input.marketPrice - input.faceValue),
+    annualCouponPayment: annualCouponIncome,
+    periodicCouponPayment: couponPayment,
+    totalPeriods,
     cashFlows: buildCashFlowSchedule(
       input,
       totalPeriods,
@@ -91,6 +108,12 @@ export function calculateBondSummary(
       settlementDate,
     ),
   };
+}
+
+export function sanitizeNumberInput(value: string) {
+  const normalized = value.replace(/[^0-9.]/g, '');
+  const parsed = Number.parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
 }
 
 export function getPeriodsPerYear(frequency: CouponFrequency): number {
@@ -106,8 +129,13 @@ function solveYieldToMaturity(input: BondInput, totalPeriods: number): number {
   let upperBound = 1;
 
   while (
-    priceBond(input.faceValue, couponPayment, totalPeriods, upperBound, periodsPerYear) >
-    input.marketPrice
+    priceBond(
+      input.faceValue,
+      couponPayment,
+      totalPeriods,
+      upperBound,
+      periodsPerYear,
+    ) > input.marketPrice
   ) {
     upperBound *= 2;
 
@@ -172,7 +200,9 @@ function buildCashFlowSchedule(
 
     return {
       period,
-      paymentDate: formatDate(addMonths(settlementDate, monthsPerPeriod * period)),
+      paymentDate: formatDate(
+        addMonths(settlementDate, monthsPerPeriod * period),
+      ),
       couponPayment,
       cumulativeInterest,
       remainingPrincipal: period === totalPeriods ? 0 : input.faceValue,
