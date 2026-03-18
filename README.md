@@ -19,11 +19,9 @@ That makes the app easier to understand for new users and easier to change live 
 
 ## Demo Video
 
-- Demo preview
-
-![BondWise demo preview](screenshots/BondWise.gif)
-
-- [BondWise app demo](screenshots/BondWise.mp4)
+<p align="left">
+  <img src="./screenshots/BondWise.gif" width="300" />
+</p>
 
 ## Features
 
